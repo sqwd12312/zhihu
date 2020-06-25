@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:id="@+id/live_broadcast"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@drawable/exclamatory_mark"
+            android:layout_marginLeft="15dp"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="10"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/grayfilletbackground"
+
+
+            >
+
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_weight="1.5"
+                android:layout_gravity="center"
+                android:background="@drawable/search"
+                android:layout_marginLeft="10dp"
+
+                />
+
+
+            <TextView
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                android:layout_height="28dp"
+                android:text="search"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/more"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:background="@drawable/more"
+            android:layout_marginRight="15dp"/>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

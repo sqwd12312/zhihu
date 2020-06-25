@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/recommend_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="这是标题"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.zhihu.RoundImageView
+            android:id="@+id/author_head_portrait"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/author_head_portrait"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/author_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="作者昵称"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            />
+
+        <TextView
+            android:id="@+id/about_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="有100w人关注了TA"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/gray_about_the_author"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容这里面是内容"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:maxLines="2"
+            android:textColor="@color/gray_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/agree_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8888"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/gray_about_the_author"
+
+
+            />
+
+        <TextView
+            android:id="@+id/agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赞同"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/gray_about_the_author"
+            />
+
+        <TextView
+            android:id="@+id/origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="•"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:textColor="@color/gray_about_the_author"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/comment_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6666"
+            android:textColor="@color/gray_about_the_author"
+
+
+            />
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评论"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/gray_about_the_author"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/gray_dividing_line"
+        >
+    </LinearLayout>
+
+</LinearLayout>
