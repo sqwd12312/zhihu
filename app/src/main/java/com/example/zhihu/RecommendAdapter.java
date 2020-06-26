@@ -65,7 +65,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
 
     @Override
     public int getItemCount() {
-        Log.d("getItemCount",mRecommendList.size()+"");
         return mRecommendList.size();
     }
 

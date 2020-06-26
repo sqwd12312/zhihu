@@ -1,6 +1,8 @@
 package com.example.zhihu;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.widget.DrawerLayout;
@@ -65,9 +67,11 @@ public class MainActivity extends Activity {
         requestRecommendData();
 
 
+
     }
 
 
+    //网络请求“推荐”数据
     private void requestRecommendData(){
         new Thread() {
             public void run() {
@@ -79,7 +83,6 @@ public class MainActivity extends Activity {
                 try {
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    Log.d("responseData",responseData);
                     parseJSONWithGSON(responseData);
 
                 } catch (IOException e) {
@@ -101,19 +104,14 @@ public class MainActivity extends Activity {
 
     }
 
+
     private void parseJSONWithGSON(String jsonData){
         Gson gson = new Gson();
         recommendList = gson.fromJson(jsonData,new TypeToken<List<Recommend>>(){}.getType());
         for (Recommend recommend: recommendList) {
             recommend.setHeadImgId(R.drawable.author_head_portrait3);
         }
-//        for (int i = 0; i<recommendList.size(); i++){
-//            recommendList.get(i).setHeadImgId(R.drawable.author_head_portrait3);
-//        }
-
     }
-
-
 
 
 }

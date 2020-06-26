@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hot_search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/grayfilletbackground"
+        android:layout_margin="8dp"
+        >
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/back"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+          />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="搜索知乎内容"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textSize="50px"
+            android:background="@null"
+            android:cursorVisible="false"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
