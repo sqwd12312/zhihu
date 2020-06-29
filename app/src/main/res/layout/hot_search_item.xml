@@ -12,17 +12,17 @@
         <TextView
             android:id="@+id/rank"
             android:layout_width="20dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:text="1"
-            android:textSize="40px"
-            android:textColor="@color/orange"/>
+            android:textSize="50px"
+            android:textColor="@color/gray_about_the_author"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:text="朱朝阳原型"
-            android:textSize="40px"
+            android:textSize="50px"
             android:textStyle="bold"/>
 
     </LinearLayout>

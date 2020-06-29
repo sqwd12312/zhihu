@@ -20,7 +20,10 @@ public class HotSearch extends DataSupport{
     private int searchTypeId;
 
     //热度排行名次
-    private int Rank;
+    private int rank;
+
+    //点击量
+    private int click;
 
     public int getId() {
         return id;
@@ -55,10 +58,28 @@ public class HotSearch extends DataSupport{
     }
 
     public int getRank() {
-        return Rank;
+        return rank;
     }
 
     public void setRank(int rank) {
-        Rank = rank;
+        this.rank = rank;
+    }
+
+    public int getClick() {
+        return click;
+    }
+
+    public void setClick(int click) {
+        this.click = click;
+    }
+
+    public HotSearch(String title, String synopsis, int searchTypeId,int click) {
+        this.click = click;
+        this.title = title;
+        this.synopsis = synopsis;
+        this.searchTypeId = searchTypeId;
+    }
+
+    public HotSearch() {
     }
 }

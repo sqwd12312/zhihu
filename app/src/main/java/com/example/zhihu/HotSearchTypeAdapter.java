@@ -45,6 +45,8 @@ public class HotSearchTypeAdapter extends RecyclerView.Adapter<HotSearchTypeAdap
                 HotSearchType type = searchTypes.get(position);
                 holder.searchButton.setTextColor(0xFF000000);
                 Toast.makeText(v.getContext(), ""+type.getSearchName(), Toast.LENGTH_SHORT).show();
+                HotSearchActivity activity = new HotSearchActivity();
+                activity.queryHotDataById(type.getId());
             }
         });
         return holder;

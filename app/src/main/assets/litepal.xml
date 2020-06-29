@@ -4,6 +4,6 @@
     <version value = "1"></version>
     <list>
         <mapping class="com.example.zhihu.bean.HotSearchType"></mapping>
-
+        <mapping class="com.example.zhihu.bean.HotSearch"></mapping>
     </list>
 </litepal>
