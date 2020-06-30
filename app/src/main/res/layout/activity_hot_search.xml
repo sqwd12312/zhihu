@@ -24,6 +24,7 @@
           />
 
         <EditText
+            android:id="@+id/search_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="搜索知乎内容"

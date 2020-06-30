@@ -5,6 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.zhihu.bean.HotSearch;
 import com.example.zhihu.bean.HotSearchType;
@@ -24,8 +30,7 @@ public class HotSearchActivity extends AppCompatActivity {
     //需要被其他类调用，所以定义成static，否则再生成HotSearchActivity实例并调用时会出现空指针
     private static RecyclerView hotSearchRecyclerView;
 
-
-
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class HotSearchActivity extends AppCompatActivity {
             searchTypes = hotSearchTypes;
         }
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.search_sort_recyclerview);
+        recyclerView = (RecyclerView)findViewById(R.id.search_sort_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -56,6 +61,32 @@ public class HotSearchActivity extends AppCompatActivity {
 
         hotSearchRecyclerView = (RecyclerView)findViewById(R.id.hot_search_recyclerview);
 
+        //第一次进入该活动时默认显示“热搜”内容
+        queryHotDataById(searchTypes.get(0).getId());
+
+        final EditText searchET = (EditText)findViewById(R.id.search_edit);
+
+        //给搜索框注册监听事件，当框内有内容时隐藏两个recyclerView，无内容时显示
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() != 0){
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    hotSearchRecyclerView.setVisibility(View.INVISIBLE);
+                }else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    hotSearchRecyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+        });
     }
 
     //保存热搜类型
