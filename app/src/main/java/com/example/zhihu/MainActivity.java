@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 
 import com.example.zhihu.bean.Recommend;
 import com.google.gson.Gson;
@@ -31,18 +35,27 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private List<Recommend> recommendList = new ArrayList<>();
 
-    private RecyclerView recyclerView ;
 
-    private SwipeRefreshLayout recommendRef;
+    private Button recommendBtn;
+
+    private Button followBtn;
+
+    private Button hotListBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recommendBtn = (Button)findViewById(R.id.recommend_btn);
+        followBtn = (Button)findViewById(R.id.follow_btn);
+        hotListBtn = (Button)findViewById(R.id.hot_list_btn);
+        recommendBtn.setOnClickListener(this);
+        followBtn.setOnClickListener(this);
+        hotListBtn.setOnClickListener(this);
+
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
@@ -51,67 +64,72 @@ public class MainActivity extends Activity {
         }
 
         //下拉刷新
-        recommendRef = (SwipeRefreshLayout)findViewById(R.id.recommend_ref);
-        recommendRef.setColorSchemeResources(R.color.colorPrimary);
-        recommendRef.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                requestRecommendData();
-            }
-        });
+//        recommendRef = (SwipeRefreshLayout)findViewById(R.id.recommend_ref);
+//        recommendRef.setColorSchemeResources(R.color.colorPrimary);
+//        recommendRef.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                requestRecommendData();
+//            }
+//        });
+//
+//        recyclerView = (RecyclerView)findViewById(R.id.recommend_recyclerview);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        requestRecommendData();
+//
+        replaceFragment(new RecommendFragment());
 
-        recyclerView = (RecyclerView)findViewById(R.id.recommend_recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        requestRecommendData();
-
-
-
-    }
-
-
-    //网络请求“推荐”数据
-    private void requestRecommendData(){
-        new Thread() {
-            public void run() {
-                //这儿是耗时操作，完成之后更新UI；
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url("http://192.168.31.88:8014/recommend.json")
-                        .build();
-                try {
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    parseJSONWithGSON(responseData);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        //更新UI
-                        RecommendAdapter adapter = new RecommendAdapter(recommendList);
-                        recyclerView.setAdapter(adapter);
-                        //关闭刷新动画
-                        recommendRef.setRefreshing(false);
-                    }
-                });
-            }
-        }.start();
 
 
     }
 
 
-    private void parseJSONWithGSON(String jsonData){
-        Gson gson = new Gson();
-        recommendList = gson.fromJson(jsonData,new TypeToken<List<Recommend>>(){}.getType());
-        for (Recommend recommend: recommendList) {
-            recommend.setHeadImgId(R.drawable.author_head_portrait3);
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.recommend_btn:
+                replaceFragment(new RecommendFragment());
+                break;
+            case R.id.follow_btn:
+                replaceFragment(new TestFragment());
+                break;
+            case R.id.hot_list_btn:
+                replaceFragment(new TestFragment2());
+            default:
+                break;
+
         }
     }
 
-
+    //替换fragment
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content_fragment,fragment);
+        transaction.commit();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
