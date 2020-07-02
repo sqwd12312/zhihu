@@ -7,6 +7,7 @@ package com.example.zhihu.bean;
 
 //关注类
 public class Follow {
+    private int id;
     //作者头像
     private int authorHead;
     //作者昵称
@@ -96,6 +97,14 @@ public class Follow {
 
     public void setCommentNumber(int commentNumber) {
         this.commentNumber = commentNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Follow(int authorHead, String authorNickName, String publicationDate, String publicationType, String title, String content, int image, int agreeNumber, int commentNumber) {

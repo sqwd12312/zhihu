@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.zhihu.bean.Recommend;
+import android.support.v7.widget.LinearLayoutManager;
+import com.example.zhihu.bean.Follow;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
@@ -23,51 +23,52 @@ import okhttp3.Response;
  * Created by qny on 2020/7/1.
  */
 
-public class RecommendFragment extends Fragment {
+public class FollowFragment extends Fragment {
 
-    private List<Recommend> recommendList = new ArrayList<>();
+    private List<Follow> follows = new ArrayList<>();
 
-    private RecyclerView recyclerView ;
+    private RecyclerView followRecyclerView;
 
-    private SwipeRefreshLayout recommendRef;
+    private FollowAdapter followAdapter;
+
+    private SwipeRefreshLayout followRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recommend_fragment,container,false);
+        View view = inflater.inflate(R.layout.follow_fragment,container,false);
         //初始化控件
         initControl(view);
-        //通过网络请求“推荐”数据
-        requestRecommendData();
+        //网络请求“关注”的数据
+        requestFollowData();
         return view;
-
     }
 
     //初始化控件
     private void initControl(View view){
-        recyclerView = (RecyclerView)view.findViewById(R.id.recommend_recyclerview);
+        followRecyclerView = (RecyclerView)view.findViewById(R.id.follow_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        followRecyclerView.setLayoutManager(layoutManager);
 
-        recommendRef = (SwipeRefreshLayout)view.findViewById(R.id.recommend_ref);
-        recommendRef.setColorSchemeResources(R.color.colorPrimary);
+        followRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.follow_ref);
+        followRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         //下拉刷新监听
-        recommendRef.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        followRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestRecommendData();
+                requestFollowData();
             }
         });
     }
 
-    //网络请求“推荐”数据
-    private void requestRecommendData(){
-        new Thread() {
+    //网络请求“关注”信息
+    private void requestFollowData(){
+        new Thread(){
+            @Override
             public void run() {
-                //这是耗时操作，完成之后再更新UI；
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.31.88:8014/recommend.json")
+                        .url("http://192.168.31.88:8014/follow.json")
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
@@ -77,25 +78,26 @@ public class RecommendFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                getActivity().runOnUiThread(new Runnable(){
+
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //更新UI
-                        RecommendAdapter adapter = new RecommendAdapter(recommendList);
-                        recyclerView.setAdapter(adapter);
-                        //关闭刷新动画
-                        recommendRef.setRefreshing(false);
+                        followAdapter = new FollowAdapter(follows);
+                        followRecyclerView.setAdapter(followAdapter);
+                        followRefreshLayout.setRefreshing(false);
                     }
                 });
             }
         }.start();
     }
 
+    //解析请求到的“关注”数据
     private void parseJSONWithGSON(String jsonData){
         Gson gson = new Gson();
-        recommendList = gson.fromJson(jsonData,new TypeToken<List<Recommend>>(){}.getType());
-        for (Recommend recommend: recommendList) {
-            recommend.setHeadImgId(R.drawable.author_head_portrait3);
+        follows = gson.fromJson(jsonData,new TypeToken<List<Follow>>(){}.getType());
+        for (Follow follow : follows){
+            follow.setAuthorHead(R.drawable.author_head_portrait);
+            follow.setImage(R.drawable.author_head_portrait);
         }
     }
 }

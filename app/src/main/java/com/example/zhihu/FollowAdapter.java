@@ -67,8 +67,8 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         holder.content.setText(follow.getContent());
         holder.image.setImageResource(follow.getImage());
         //可能会出问题，可能要写成String
-        holder.agreeNumber.setText(follow.getAgreeNumber());
-        holder.commentNumber.setText(follow.getCommentNumber());
+        holder.agreeNumber.setText(follow.getAgreeNumber()+"");
+        holder.commentNumber.setText(follow.getCommentNumber()+"");
     }
 
     @Override
