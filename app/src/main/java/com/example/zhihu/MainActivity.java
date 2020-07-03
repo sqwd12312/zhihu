@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replaceFragment(new FollowFragment());
                 break;
             case R.id.hot_list_btn:
-                replaceFragment(new TestFragment2());
+                replaceFragment(new HotListFragment());
             default:
                 break;
 

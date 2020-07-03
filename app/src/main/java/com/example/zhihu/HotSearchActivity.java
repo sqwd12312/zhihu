@@ -72,8 +72,7 @@ public class HotSearchActivity extends AppCompatActivity implements View.OnClick
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        HotSearchTypeAdapter adapter = new HotSearchTypeAdapter(searchTypes);
-        recyclerView.setAdapter(adapter);
+
 
         hotSearchRecyclerView = (RecyclerView)findViewById(R.id.hot_search_recyclerview);
 
@@ -268,6 +267,8 @@ public class HotSearchActivity extends AppCompatActivity implements View.OnClick
         }else {
             searchTypes = hotSearchTypes;
         }
+        HotSearchTypeAdapter adapter = new HotSearchTypeAdapter(searchTypes);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
