@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HotSearchActivity"></activity>
+        <activity android:name=".HotSearchActivity" />
+        <activity android:name=".MemberActivity" />
+        <activity android:name=".FindActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".MyInformationActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="消息"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="60px"/>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <!--
+            app:layout_behavior="@string/bye_burger_bottom_behavior"用来设置bottomNavigation在页面上滑动时隐藏,下滑时出现的行为
+    -->
+    <com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:bnv_active_color="@color/red"
+        android:layout_gravity="bottom"
+        app:layout_behavior="@string/bye_burger_bottom_behavior"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
+
