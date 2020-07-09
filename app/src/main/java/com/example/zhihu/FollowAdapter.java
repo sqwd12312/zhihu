@@ -1,5 +1,6 @@
 package com.example.zhihu;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zhihu.bean.Follow;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -21,25 +23,25 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
     static  class ViewHolder extends RecyclerView.ViewHolder{
 
-        RoundImageView authorHead;
+        SimpleDraweeView authorHead;
         TextView  authorNickName;
         TextView publicationDate;
         TextView publicationType;
         TextView title;
         TextView content;
-        ImageView image;
+        SimpleDraweeView image;
         TextView agreeNumber;
         TextView commentNumber;
 
         public ViewHolder(View view) {
             super(view);
-            authorHead = (RoundImageView)view.findViewById(R.id.author_head);
+            authorHead = (SimpleDraweeView)view.findViewById(R.id.author_head);
             authorNickName = (TextView)view.findViewById(R.id.author_nickname);
             publicationDate = (TextView)view.findViewById(R.id.publication_date);
             publicationType = (TextView)view.findViewById(R.id.publication_type);
             title = (TextView)view.findViewById(R.id.title);
             content = (TextView)view.findViewById(R.id.content);
-            image = (ImageView)view.findViewById(R.id.image);
+            image = (SimpleDraweeView)view.findViewById(R.id.image);
             agreeNumber = (TextView)view.findViewById(R.id.agree_number);
             commentNumber = (TextView)view.findViewById(R.id.comment_number);
         }
@@ -59,13 +61,17 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Follow follow = follows.get(position);
-        holder.authorHead.setImageResource(follow.getAuthorHead());
+        //本地图片设置成圆角
+        Uri uri = Uri.parse("res://com.example.zhihu/" + follow.getAuthorHead());
+        holder.authorHead.setImageURI(uri);
         holder.authorNickName.setText(follow.getAuthorNickName());
         holder.publicationDate.setText(follow.getPublicationDate());
         holder.publicationType.setText(follow.getPublicationType());
         holder.title.setText(follow.getTitle());
         holder.content.setText(follow.getContent());
-        holder.image.setImageResource(follow.getImage());
+        //本地图片设置成圆角
+        Uri uri2 = Uri.parse("res://com.example.zhihu/" + follow.getImage());
+        holder.image.setImageURI(uri2);
         //可能会出问题，可能要写成String
         holder.agreeNumber.setText(follow.getAgreeNumber()+"");
         holder.commentNumber.setText(follow.getCommentNumber()+"");

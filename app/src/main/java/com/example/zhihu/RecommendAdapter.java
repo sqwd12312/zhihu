@@ -1,5 +1,6 @@
 package com.example.zhihu;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zhihu.bean.Recommend;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
 
     static  class ViewHolder extends RecyclerView.ViewHolder{
         TextView recommendTitle;
-        RoundImageView headImg;
+        SimpleDraweeView headImg;
         TextView nickName;
         TextView aboutAuthor;
         TextView content;
@@ -35,7 +37,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
         public ViewHolder(View view) {
             super(view);
             recommendTitle = (TextView)view.findViewById(R.id.recommend_title);
-            headImg = (RoundImageView)view.findViewById(R.id.author_head_portrait);
+            headImg = (SimpleDraweeView)view.findViewById(R.id.author_head_portrait);
             nickName = (TextView)view.findViewById(R.id.author_nickname);
             aboutAuthor = (TextView)view.findViewById(R.id.about_author);
             content = (TextView)view.findViewById(R.id.content);
@@ -55,7 +57,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Recommend recommend = mRecommendList.get(position);
         holder.recommendTitle.setText(recommend.getTitle());
-        holder.headImg.setImageResource(recommend.getHeadImgId());
+        //本地图片设置成圆角
+        Uri uri = Uri.parse("res://com.example.zhihu/" + recommend.getHeadImgId());
+        holder.headImg.setImageURI(uri);
         holder.nickName.setText(recommend.getAuthorNickName());
         holder.aboutAuthor.setText(recommend.getAboutAuthor());
         holder.content.setText(recommend.getContent());
